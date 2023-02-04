@@ -1,0 +1,55 @@
+def patient_discussion(patient, q_count):
+    response_list = ['n', 'a', 's', 'al', 'cc', 'c', 'w', 'h', 'menu']
+    question = input('''What would you like to ask the patient? You can ask them for/about:
+    N = Their name.
+    A = Their age.
+    S = Their sex.
+    AL = Their allergies.
+    CC = The thing bothering them most.
+    C = Other symptoms they're experiencing.
+    W = Their weight.
+    H = Their height.
+    
+    Or type "main" to go back to the main screen. ''')
+    
+    if question.lower() == "n":
+        print("My name is "+ patient['Name'] + ". ")
+        print()
+        patient_discussion(patient, q_count)
+    if question.lower() == "a":
+        print("I'm "+ str(patient['Age']) + " years old. ")
+        print()
+    if question.lower() == "s":
+        print("I'm a "+patient['Sex'] + ". ")
+        print()
+        patient_discussion(patient, q_count)
+    if question.lower() == 'al':
+        try:
+            print("As far as I'm aware, I'm allergic to " + patient['Allergies'] + ".")
+            print()
+        except:
+            print("I'm not allergic to anything.")
+    if question.lower() == "cc":
+        print("I'd say the biggest thing bothering me now is "+ patient['Chief Complaint'] + ". ")
+        patient_discussion(patient, q_count)
+    if question.lower() == "c":
+        print("What symptoms I'm having? I'd say I'm experiencing "+ str(patient['Complaints']) + ". ")
+        print()
+        patient_discussion(patient, q_count)
+    if question.lower() == "h":
+        patient_feet = math.floor(patient['Height']/12)
+        print("I am " + str(patient_feet) + ' feet and ' + str(patient['Height'] - (patient_feet*12))
+              + ' inches tall.')
+        print()
+        patient_discussion(patient, q_count)
+    if question.lower() == "w":
+        perceived_weight = int(random.randint((round(P1['Weight']*.9)),round((P1['Weight'])*1.1)))
+        print("Last time I weighed myself, I was somewhere around " + str(perceived_weight) + ". ")
+        print()
+        patient_discussion(patient, q_count)
+    if question.lower() == "main":
+        menu()
+    if question.lower() not in response_list:
+        print("What the heck are you even asking me, doc?")
+        print()
+        patient_discussion(patient, q_count)
