@@ -1,3 +1,6 @@
+import math
+import random
+
 P1 = {
     'ID': 1,
     'Name': 'John Smith',
