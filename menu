@@ -1,0 +1,29 @@
+def menu():
+    choice_list = ['c', 't', 'm', 'dt', 's', 'd']
+    choice = input('''What do you want to do? 
+    Your choices are:
+    C = Check Patient Sheet
+    T = Talk to Patient
+    M = Prescribe Medication
+    DT = Perform a Diagnostic Test
+    S = Perform Surgery
+    D = Diagnose the Patient
+
+    ''')
+
+    if choice.lower() == "c":
+        patient_sheet(patient)
+        menu()
+    if choice.lower() == "t":
+        patient_discussion(patient, 0)
+    if choice.lower() == "m":
+        prescribe_medication(patient)
+    if choice.lower() == "dt":
+        diagnostic_test(patient)
+    if choice.lower() == "s":
+        perform_surgery(patient)
+    if choice.lower() == "d":
+        diagnose_patient(patient)
+    if choice.lower() not in choice_list:
+        print("You've chosen an invalid action. Please try again. ")
+    menu()
