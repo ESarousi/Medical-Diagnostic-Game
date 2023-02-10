@@ -1,6 +1,0 @@
-def prescribe_medication(patient):
-    meds = input('''What do you want to prescribe? You can prescribe them:
-    a = acetaminophen
-    i = ibuprofen
-    in = short-acting insulin
-    ab = antibiotics''')
