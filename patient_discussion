@@ -19,16 +19,18 @@ def patient_discussion(patient, q_count):
     if question.lower() == "a":
         print("I'm "+ str(patient['Age']) + " years old. ")
         print()
+        patient_discussion(patient, q_count)
     if question.lower() == "s":
         print("I'm a "+patient['Sex'] + ". ")
         print()
         patient_discussion(patient, q_count)
     if question.lower() == 'al':
         try:
-            print("As far as I'm aware, I'm allergic to " + patient['Allergies'] + ".")
+            print("As far as I'm aware, I'm allergic to " + str(patient['Allergies'].keys())[11:-2] + ".")
             print()
         except:
             print("I'm not allergic to anything.")
+        patient_discussion(patient, q_count)
     if question.lower() == "cc":
         print("I'd say the biggest thing bothering me now is "+ patient['Chief Complaint'] + ". ")
         patient_discussion(patient, q_count)
@@ -44,7 +46,7 @@ def patient_discussion(patient, q_count):
         patient_discussion(patient, q_count)
     if question.lower() == "w":
         perceived_weight = int(random.randint((round(P1['Weight']*.9)),round((P1['Weight'])*1.1)))
-        print("Last time I weighed myself, I was somewhere around " + str(perceived_weight) + ". ")
+        print("Last time I weighed myself, I was somewhere around " + str(perceived_weight) + " pounds. ")
         print()
         patient_discussion(patient, q_count)
     if question.lower() == "main":
