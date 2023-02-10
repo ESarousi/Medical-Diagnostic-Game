@@ -1,0 +1,11 @@
+def diagnose_patient(patient):
+    guess = input('What illness would you like to diagnose the patient with? ')
+    diagnose_score = fuzz.token_set_ratio(guess, patient['Diagnosis'])
+    if diagnose_score > 70:
+        diagnosis = 'Correct! You have successfully diagnosed this patient!'
+    else:
+        diagnosis = 'Your diagnosis is incorrect.'
+    print()
+    print(diagnosis)
+    print('Diagnose Score: ' + str(diagnose_score))
+    menu()
