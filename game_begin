@@ -1,6 +1,35 @@
 import math
 import random
 
+#Might include it - list of different illnesses. May use it for modeling for diagnosis.
+
+URL = "https://www.nhsinform.scot/illnesses-and-conditions/a-to-z"
+r = requests.get(URL)
+  
+letters = ['A ', 'B ', 'C ', 'D ', 'E ', 'F ', 'G ', 'H ', 'I ', 'J ', 'K ', 'L ',
+           'M ', 'N ', 'O ', 'P ', 'Q ', 'R ', 'S ', 'T ', 'U ', 'V ', 'W ', 'X ', 'Y ', 'Z ']
+soup = BeautifulSoup(r.content, 'html5lib') # If this line causes an error, run 'pip install html5lib' or install html5lib
+soup = str(soup.prettify())
+soup = soup[20192:-9925]
+soup = re.sub('<[^>]+>', '', soup)
+soup = soup.replace('Back to top', '')
+soup = soup.replace('''          
+         
+         
+          ''', '')
+soup = soup.replace('\n ', '')
+soup_list = soup.split('\n          ')
+
+soup_list = [s.strip() for s in soup_list]
+
+for s in soup_list:
+    if len(s) > 30:
+        soup_list.remove(s)
+
+soup_list
+
+
+
 P1 = {
     'ID': 1,
     'Name': 'John Smith',
@@ -56,26 +85,9 @@ Patient_List = [P1, P2, P3]
 
 def game_begin():
     patient = random.choice(Patient_List)
-    def menu():
-        choice = input('''What do you want to do? 
-        Your choices are:
-        C = Check Patient Sheet
-        T = Talk to Patient
-        M = Prescribe Medication
-        D = Perform a Diagnostic Test
-        S = Perform Surgery''')
-
-        if choice.lower() == "c":
-            patient_sheet(patient, 0)
-        if choice.lower() == "t":
-            patient_discussion(patient, 0)
-        if choice.lower() == "m":
-            prescribe_medication(patient)
-        if choice.lower() == "d":
-            diagnostic_test(patient)
-        if choice.lower() == "s":
-            perform_surgery(patient)
-        else:
-            print("You've chosen an invalid action. Please try again. ")
-            menu()
+    now = datetime.now()
+    date = now.strftime("%m/%d/%Y")
+    time = now.strftime("%H:%M:%S")
+    time = now.strftime("%H:%M:%S")
+    activity_log = []
     menu()
