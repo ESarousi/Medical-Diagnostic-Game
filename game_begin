@@ -1,7 +1,15 @@
+#Importing Packages
+from bs4 import BeautifulSoup
+from datetime import date
+from datetime import datetime
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
 import math
+import os
+import pandas as pd
 import random
-
-#Might include it - list of different illnesses. May use it for modeling for diagnosis.
+import re
+import requests
 
 URL = "https://www.nhsinform.scot/illnesses-and-conditions/a-to-z"
 r = requests.get(URL)
