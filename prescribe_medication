@@ -3,4 +3,44 @@ def prescribe_medication(patient):
     a = acetaminophen
     i = ibuprofen
     in = short-acting insulin
-    ab = antibiotics''')
+    ab = antibiotics
+    
+    Or you can type main to go back to the main menu. ''')
+    
+    roll = random.randint(1,10)
+
+    if meds == 'a' and 'acetaminophen' not in patient['Allergies'].keys():
+        try:
+            update_log(date, time, 'acetaminophen', cost_dict['Acetaminophen'], time_dict['Acetaminophen'])
+            patient['Pain'] = patient['Pain'] - 2
+            if roll == 1 or roll == 2:
+                patient['Complaints'].append(random.choice(side_effects_dict['acetaminophen']))
+            print("You have given the patient acetaminophen.")
+            print(roll)
+            print(patient['Complaints'])
+        except:
+            print("Error!")
+        
+    if meds == 'i' and 'ibuprofen' not in patient['Allergies'].keys():
+        update_log(date, time, 'ibuprofen', cost_dict['Ibuprofen'], time_dict['Ibuprofen'])
+        patient['Pain'] = patient['Pain'] - 2
+        if roll == 1 or roll == 2:
+            patient['Complaints'].append(random.choice(side_effects_dict['Ibuprofen']))
+        print("You have given the patient ibuprofen.")
+        print(roll)
+        print(patient['Complaints'])
+
+    if meds == 'in' and 'insulin' not in patient['Allergies'].keys():
+        try:
+            update_log(date, time, 'insulin', cost_dict['Humalog'], time_dict['Humalog'])
+            patient['Blood Glucose'] = patient['Blood Glucose'] - 30
+            patient['Weight'] = patient['Weight'] + 3
+            print("You have given the patient acetaminophen.")
+            print(roll)
+        except:
+            print("Error!")
+        
+    if meds == 'main':
+        menu(patient)
+    
+    prescribe_medication(patient)
