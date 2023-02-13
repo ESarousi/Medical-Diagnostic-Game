@@ -8,4 +8,4 @@ def diagnose_patient(patient):
     print()
     print(diagnosis)
     print('Diagnose Score: ' + str(diagnose_score))
-    menu()
+    menu(patient)
