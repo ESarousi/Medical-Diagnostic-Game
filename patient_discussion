@@ -1,27 +1,34 @@
 def patient_discussion(patient, q_count):
     response_list = ['n', 'a', 's', 'al', 'cc', 'c', 'w', 'h', 'menu']
-    question = input('''What would you like to ask the patient? You can ask them for/about:
-    N = Their name.
-    A = Their age.
-    S = Their sex.
-    AL = Their allergies.
-    CC = The thing bothering them most.
-    C = Other symptoms they're experiencing.
-    W = Their weight.
-    H = Their height.
-    
-    Or type "main" to go back to the main screen. ''')
-    
+    question = input('''What would you like to ask the patient? Type "L" for a list of what you can ask them. ''')
+
+    if question.lower() == "l":
+        print('''You can select:
+        N for their name.
+        A for their age.
+        S for their sex.
+        AL for their allergies.
+        CC for their chief complaint.
+        C for their other complaints.
+        W for their weight.
+        H for their height.
+
+        Or type "menu" to go back to the main screen. ''')
+        print()
+        patient_discussion(patient, q_count)        
     if question.lower() == "n":
         print("My name is "+ patient['Name'] + ". ")
+        q_count += 1
         print()
         patient_discussion(patient, q_count)
     if question.lower() == "a":
         print("I'm "+ str(patient['Age']) + " years old. ")
+        q_count += 1
         print()
         patient_discussion(patient, q_count)
     if question.lower() == "s":
         print("I'm a "+patient['Sex'] + ". ")
+        q_count += 1
         print()
         patient_discussion(patient, q_count)
     if question.lower() == 'al':
@@ -30,28 +37,39 @@ def patient_discussion(patient, q_count):
             print()
         except:
             print("I'm not allergic to anything.")
+        q_count += 1
         patient_discussion(patient, q_count)
     if question.lower() == "cc":
         print("I'd say the biggest thing bothering me now is "+ patient['Chief Complaint'] + ". ")
+        q_count += 1
         patient_discussion(patient, q_count)
     if question.lower() == "c":
         print("What symptoms I'm having? I'd say I'm experiencing "+ str(patient['Complaints']) + ". ")
         print()
+        q_count += 1
         patient_discussion(patient, q_count)
     if question.lower() == "h":
         patient_feet = math.floor(patient['Height']/12)
         print("I am " + str(patient_feet) + ' feet and ' + str(patient['Height'] - (patient_feet*12))
               + ' inches tall.')
         print()
+        q_count += 1
         patient_discussion(patient, q_count)
     if question.lower() == "w":
-        perceived_weight = int(random.randint((round(P1['Weight']*.9)),round((P1['Weight'])*1.1)))
+        perceived_weight = int(random.randint((round(patient['Weight']*.9)),round((patient['Weight'])*1.1)))
         print("Last time I weighed myself, I was somewhere around " + str(perceived_weight) + " pounds. ")
         print()
+        q_count += 1
+    if question.lower() == "p":
+        print("On a scale of one to ten, my pain level is about a " + str(patient['Pain']) + ". ")
+        print()
+        q_count += 1
         patient_discussion(patient, q_count)
-    if question.lower() == "main":
-        menu()
-    if question.lower() not in response_list:
+    elif question.lower() == "main":
+        update_log(date, time, 'Visited the patient', None, None)
+        menu(patient)
+    elif question.lower() not in response_list:
         print("What the heck are you even asking me, doc?")
         print()
+        q_count += 1
         patient_discussion(patient, q_count)
