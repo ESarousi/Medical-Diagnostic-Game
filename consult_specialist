@@ -1,0 +1,19 @@
+def consult_specialist(patient):
+    selection = input("Which patient do you want to consult? Type L to see a list.")
+    
+    if question.lower() == "l":
+        print('''You can select:
+        
+        CR for cardiology.
+        DM for dermatology.
+        GI for gastroenterology.
+        NP for nephrology.
+        NR for neurology.
+        OP for ophthalmology.
+        OR for orthopedics.
+        OT for otolaryngology.
+        PR for proctology.
+        UR for urology.
+        
+        Who do you want to consult?''')
+    consult_specialist(patient)
