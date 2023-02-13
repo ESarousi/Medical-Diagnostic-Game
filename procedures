@@ -1,0 +1,55 @@
+def procedures(patient):
+    test = input("What type of test or procedure would you like to order for your patient? Type L to see a list.")
+    
+    if question.lower() == "l":
+        print('''You can select:
+        19 to order a COVID-19 test.
+        A1 to test their A1C.
+        AN to order an angiogram.
+        CN for Colonoscopy
+        CT for CT Scan
+        DS for them to order a drug screen.
+        EC to order an elecrocardiogram.
+        HA to order an Hepatitis A Antibody Test.
+        HB to order an Hepatitis A Antibody Test.
+        HC to order an Hepatitis A Antibody Test.
+        HV to order an HIV test.
+        MA to order an MRA test.
+        MC to order a mercury test.
+        MG to order a magnesium test.
+        MP to order a metabolic panel.
+        MR to order an MRI Scan.
+        LD to order a lead test.
+        LN to order a lipid panel.
+        LP to order a lumbar puncture.
+        OS to order an osmolality test.
+        PE to order a psychiatric evaluation.
+        PS to order a pap smear.
+        PT to order a pet scan.
+        RE to order a rectal exam.
+        RV to order an RSV exam.
+        SA to order a sleep apnea exam.
+        SC to order a sickle cell screening.
+        SI to order a spinal injection.
+        SL to order a stool test.
+        SP to order an STI testing panel.
+        SR to order a strep test.
+        ST to order a sperm test.
+        UR to order a urinalysis test.
+        VD to order a vitamin deficiency test.
+        XR to order an X-Ray.
+        
+        or for biopsies:
+        BB to biopsy their brain.
+        BL to biopsy their testicle.
+        BK to biopsy their kidney.
+        BI to biopsy their skin.
+        BL to biopsy their liver
+        BN to biopsy their bone.
+        BR to biopsy their rectum.
+        BS to biopsy their breast.
+        BT to biopsy their throat.
+        BY to biopsy their lymph node.
+
+        Or type "menu" to go back to the main screen. ''')
+    procedures(patient)
