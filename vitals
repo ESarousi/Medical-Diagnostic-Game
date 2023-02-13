@@ -1,0 +1,30 @@
+def vitals(patient):
+    test = input('What kind of diagnostic test would you like to do? Type "L" for a list of tests. ')
+    
+    if question.lower() == "l":
+        print('''You can select:
+        T to take their temperature.
+        W to weigh the patient.
+        BG to test their blood glucose.
+        BP to test their blood pressure.
+
+        Or type "menu" to go back to the main screen. ''')
+    if test.lower() == "t":
+        print('The temperature reads as ' + str(patient['Temperature']) + " F. ")
+        print()
+    if test.lower() == "w":
+        print('You weighed the patient and found that they weigh ' + str(patient['Weight']) + " pounds. ")
+        print()
+    if test.lower() == "bg":
+        print("You tested the patient's blood glucose. The results of the finger stick read as " + 
+              str(patient['Blood Glucose']) + " mmol/L. ")
+        print()
+    if test.lower() == "bp":
+        print("You tested the patient's blood pressure and it came back as " + str(patient['Blood Pressure']) + ". ")
+        print()
+    if test.lower() == "o2":
+        print("The patient's oximeter read at " + str(patient['Blood Pressure']) + "%. ")
+        print()
+
+    if test.lower() == "menu":
+        menu(patient)
