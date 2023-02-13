@@ -1,0 +1,3 @@
+def update_log(date, time_now, activity, cost, time_required):
+    activity_log.append({'Date': date, 'Time': time, 'Activity': activity,
+                         'Cost': cost, 'Time Required (Hours)': time_required})
