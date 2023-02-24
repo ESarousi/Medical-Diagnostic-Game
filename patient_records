@@ -4,13 +4,16 @@ def patient_records(patient):
     print("Sex: " + patient['Sex'])
     print("Weight: " + str(patient['Weight']))
     print("Height (inches): " + str(patient['Height']))
-    try:
-        print('''Activity Log
-        
-        Date - Time - Activity - Cost - Duration
-        ''')
-        for activity in activity_log:
-            print(activity.values())
-    except:
-        print("Can't print the activity log.")
+    if len(activity_log) > 0:
+        try:
+            print('''Activity Log
+
+            Date - Time - Activity - Cost - Duration
+            ''')
+            for activity in activity_log:
+                print(activity.values())
+        except:
+            print("Can't print the activity log.")
+    else:
+        pass
     menu(patient)
