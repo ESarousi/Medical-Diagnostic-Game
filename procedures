@@ -1,7 +1,7 @@
 def procedures(patient):
     test = input("What type of test or procedure would you like to order for your patient? Type L to see a list.")
     
-    if question.lower() == "l":
+    if test.lower() == "l":
         print('''You can select:
         19 to order a COVID-19 test.
         A1 to test their A1C.
@@ -52,4 +52,6 @@ def procedures(patient):
         BY to biopsy their lymph node.
 
         Or type "menu" to go back to the main screen. ''')
+    if test.lower() == "menu" or test.lower() == "main" :
+        menu(patient)
     procedures(patient)
