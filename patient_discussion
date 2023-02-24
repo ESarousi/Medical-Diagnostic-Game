@@ -1,17 +1,18 @@
 def patient_discussion(patient, q_count):
-    response_list = ['n', 'a', 's', 'al', 'cc', 'c', 'w', 'h', 'menu']
+    response_list = ['a', 'al', 'b', 'c', 'cc', 'h', 'n', 's', 'w', 'main', 'menu']
     question = input('''What would you like to ask the patient? Type "L" for a list of what you can ask them. ''')
 
     if question.lower() == "l":
         print('''You can select:
-        N for their name.
         A for their age.
-        S for their sex.
         AL for their allergies.
-        CC for their chief complaint.
+        B for the background of this illness.
         C for their other complaints.
-        W for their weight.
+        CC for their chief complaint.
         H for their height.
+        N for their name.
+        S for their sex.
+        W for their weight.
 
         Or type "menu" to go back to the main screen. ''')
         print()
@@ -37,6 +38,10 @@ def patient_discussion(patient, q_count):
             print()
         except:
             print("I'm not allergic to anything.")
+        q_count += 1
+        patient_discussion(patient, q_count)
+    if question.lower() == "b":
+        print(str(patient['Background']))
         q_count += 1
         patient_discussion(patient, q_count)
     if question.lower() == "cc":
@@ -65,8 +70,8 @@ def patient_discussion(patient, q_count):
         print()
         q_count += 1
         patient_discussion(patient, q_count)
-    elif question.lower() == "main":
-        update_log(date, time, 'Visited the patient', None, None)
+    elif question.lower() == "main" or question.lower() == "menu":
+        update_log(date, time, 'Visited the patient', 0, 1)
         menu(patient)
     elif question.lower() not in response_list:
         print("What the heck are you even asking me, doc?")
