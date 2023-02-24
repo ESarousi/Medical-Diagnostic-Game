@@ -1,7 +1,7 @@
 #Importing Packages
 from bs4 import BeautifulSoup
-from datetime import date
-from datetime import datetime
+from datetime import date, datetime
+import time as t
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 import math
@@ -274,16 +274,18 @@ time_dict = {
 }
 
 side_effects_dict = {
-    'acetaminophen': ['Nausea', 'Vomiting', 'Constipation', 'Itching', 'Stomach Discomfort']
+    'acetaminophen': ['Nausea', 'Vomiting', 'Constipation', 'Itching', 'Stomach Discomfort'],
     'ibuprofen': ['Constipation', 'Diarrhea', 'Gas', 'Bloating', 'Nausea', 'Heartburn', 'Indigestion']
 }
 
 #game environment variables
 now = datetime.now()
 date = now.strftime("%m/%d/%Y")
-time = now.strftime("%H:%M:%S")
 activity_log = []
 
 def game_begin():
+    print('''Welcome to this Medical Diagnostic Training Tool. Whether you look to this program as practice for dealing with a patient or merely to have fun, I hope you enjoy your experience here. Know that these scenarios can absolutely happen in real life and that your actions have consequences.
+
+''')
     patient = random.choice(Patient_List)
     menu(patient)
