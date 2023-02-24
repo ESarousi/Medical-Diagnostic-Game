@@ -1,19 +1,73 @@
 def consult_specialist(patient):
-    selection = input("Which patient do you want to consult? Type L to see a list.")
-    
-    if question.lower() == "l":
+    selection = input('''Which specialist do you want to consult? Type L to see a list.
+                      You can also type 'main' to go back to the main menu.''')
+    if selection.lower() == "l":
         print('''You can select:
         
         CR for cardiology.
-        DM for dermatology.
         GI for gastroenterology.
         NP for nephrology.
         NR for neurology.
         OP for ophthalmology.
         OR for orthopedics.
-        OT for otolaryngology.
-        PR for proctology.
-        UR for urology.
+        PL for pulmonology.
         
         Who do you want to consult?''')
+    if selection.lower() == "cr":
+        print('''The cardiologist examined your patient and determined that the patient has about ''' + str(patient["Heart"]) + "% of their heart function intact. ")
+        print()
+        update_log(date, time, 'Consulted Cardiology', 0, 2)
+        consult_specialist(patient)
+#     if selection.lower() == "dm":
+#         print('''Dermatologist: Yeah, I saw the patient. They told me they didn't apply sunscreen before waltzing into the ER? Is melanoma some sort of joke to them? Anyways, the patient looks fine. ''')
+#         #I need to add a function here.
+#         print()
+#         update_log(date, time, 'Consulted Dermatology', 0, 2)
+#         consult_specialist(patient)
+    if selection.lower() == "gi":
+        print('''The gastrolenterologist examined your patient and determined that the patient has about ''' + str(patient['Liver']) + '''% of their liver function intact.''')
+        print()
+        update_log(date, time, 'Consulted Gastroenterology', 0, 2)
+        consult_specialist(patient)
+    if selection.lower() == "np":
+        print('''The nephrologist examined your patient and determined that the patient has about ''' + str(patient['Kidneys']) + '''% of their kidney function in tact.''')
+        print()
+        update_log(date, time, 'Consulted Nephrology', 0, 2)
+        consult_specialist(patient)
+    if selection.lower() == "nr":
+        update_log(date, time, 'Consulted Neurology', 0, 2)
+        print('''The neurologist examined your patient and determined that the patient has about ''' + str(patient['Brain']) + '''% of their brain function in tact.''')
+        print()
+        consult_specialist(patient)
+    if selection.lower() == "op":
+        print('''The ophthalmologist examined your patient and determined that the patient has about ''' + str(patient['Eyes']) + "% of their eye function in tact.")
+        print()
+        update_log(date, time, 'Consulted Ophthalmology', 0, 3)
+        consult_specialist(patient)
+    if selection.lower() == "or":
+        update_log(date, time, 'Consulted Orthopedics', 0, 2)
+        if len(patient['Broken Bones']) == 0:
+            print('''The orthopedist examined the patient and found that there are no orthopedic-related issues withd the patient.''')
+            print()
+        if len(patient['Broken Bones']) == 1:
+            print('''The orthopedist examined the patient and found that the patient has a broken ''' + str(patient['Broken Bones']) + ".")
+            print()
+        if len(patient['Broken Bones']) > 1:
+            print('''The orthopedist examined the patient and found that the following bones are broken: ''' + str([bone.lower() for bone in patient['Broken Bones']]) + ".")
+            print()
+        consult_specialist(patient)
+    if selection.lower() == "pl":
+        print('''The pulmonologist examined your patient and determined that the patient has about ''' + str(patient['Lungs']).lower() + "% of their lung function intact.")
+        update_log(date, time, 'Consulted Pulmonology', 0, 2)
+        print()
+        consult_specialist(patient)
+#     if selection.lower() == "pt":
+#         print('''Proctology: The patient has a butthole. What more did you want? Want me to stick a finger in and see what happens? I mean, I can do that if you want.''')
+#         print('You walk away, and feel the protcologist staring at your butt on the way out.')
+#         update_log(date, time, 'Consulted Proctology', 0, 2)
+#         print()
+#         consult_specialist(patient)
+    if selection.lower() == "main" or selection.lower() == "menu":
+        menu(patient)
+        
     consult_specialist(patient)
