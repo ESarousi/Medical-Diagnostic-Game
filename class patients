@@ -1,0 +1,55 @@
+class patients:
+    def __init__(self, id = None, name = None, age = None, sex = None, allergies = {}, conditions = None,
+                 chief_complaint = None, complaints = [], story = None, diagnosis = None, diagnosed = False, weight = 0,
+                 height = 0, bg = 0, bp = 0, o2 = 0, temp = 0, vision = False, pain = 0, brain = 0, eyes = 0, heart = 0,
+                 lungs = 0, kidneys = 0, liver = 0, has_broken_bones = False, broken_bones = []):
+        self.id = id #Patient ID
+        self.name = name #Patient Name
+        self.age = age #Age
+        self.sex = sex #Biological sex.
+        self.allergies = allergies #What they're allergic to. It's a dictionary. Values are reactions.
+        self.conditions = conditions #Prior conditions.
+        self.chief_complaint = chief_complaint #Their foremost issue.
+        self.complaints = complaints #Other issues.
+        self.story = story #Quick background on the story of the injury/illness
+        self.diagnosis = diagnosis #Major issue of what's wrong with them.
+        self.diagnosed = diagnosed #If they've been diagnosed
+        self.weight = weight #Weight
+        self.height = height #Height
+        self.bg = bg #Blood glucose
+        self.bp = bp #Blood pressure (systolic)
+        self.o2 = o2 #Oxygen saturation level
+        self.temp = temp #Forehead temperature
+        self.vision = vision #If they can see.
+        self.pain = pain #Pain scale from 1-10.
+        self.brain = brain #Overall brain health.
+        self.eyes = eyes #Overall eye health.
+        self.heart = heart #Overall heart health.
+        self.lungs = lungs #Overall lungs health.
+        self.kidneys = kidneys #Overall kidneys health.
+        self.liver = liver #Overall liver health.
+        self.has_broken_bones = has_broken_bones #If they have broken bones.
+        self.broken_bones = broken_bones #List of broken bones.
+    
+p1 = patients(id = 1, name = 'John Smith', age = 62, sex = 'Male', allergies = {'oxycodone': 'hives'}, conditions = None, chief_complaint = 'vomiting',
+    complaints = ['abdominal pain', 'lethargy', 'jaundice', 'lack of appetite', 'dark urine'], story = "I don't remember when it started. Maybe five years ago? I started getting really sluggish. I thought I was just getting old. But then I started losing interest in foods I loved, and then my pee would get really dark no matter how much water I drank. And then my stomach just starts hurting a lot. I laid off the fried foods but it keeps happening. And for the last few days, I just kept throwing up. The wife started begging me to go to the ER, and I finally gave in.",
+    diagnosis = 'Liver Cancer', diagnosed = False, weight = 244, height = 65, bg = 141, bp = 136, o2 = 100, temp = 99.4, vision = True, pain = 3, brain = 100, eyes = 100, heart = 97, lungs = 99, 
+    kidneys = 100, liver = 67, has_broken_bones = False, broken_bones = [])
+p2 = patients(id = 2, name = 'Sally Samson', age = 49, sex = 'Female', allergies = {None: None}, conditions = None, chief_complaint = "trouble breathing",
+    complaints = ['sore throat', 'congestion', 'fatigue', 'headache', 'loss of taste'], story = "I started feeling crummy three days ago. I think it's just a cold, but it's the worst cold of my life. I ate the chicken soup, I took the nyquil and I still feel like garbage. I came in when a couple hours ago, I just felt like I couldn't get a deep breath. Help me, doc.",
+    diagnosis = 'COVID-19', diagnosed = False, weight = 157, height = 61, bg = 105, bp = 113, o2 = 96, temp = 101.7, vision = True, pain = 2, brain = 98, eyes = 97, heart = 100, lungs = 81, kidneys = 99,
+    liver = 98, has_broken_bones = False, broken_bones = [])
+p3 = patients(id = 3, name = 'Michael Jordanson', age = 36, sex = 'Male', allergies = {'penecillin': 'anaphylaxis'}, conditions = 'hypertension', chief_complaint = 'cramping in my leg',
+    complaints = ['lethargy', 'dry mouth', 'nausea'], story = "I thought I was just gettinig old and couldn't handle my liquor anymore. I kept getting sick from drinking and wanting to sleep in more. I'm getting a bit thirsty. I can't remember when it started. Kind of a gradual thing, y'know? Maybe over the last year. My PCP said I had high blood pressure a few years back, but I'm not sure if that means suddenly my leg starts cramping up. It's at the calf too. That's all I know.",
+    diagnosis = 'Diabetes Type 2', diagnosed = False, weight = 257, height = 68, bg = 225, bp = 150, o2 = 99, temp = 98.4, vision = True, pain = 6, brain = 97, eyes = 87, heart = 94, lungs = 100,
+    kidneys = 89, liver = 93, has_broken_bones = False, broken_bones = [])
+p4 = patients(id = 4, name = 'Taylor Outback', age = 23, sex = 'Female', allergies = {'peanut butter': "hives", "ibuprofen": "rash"}, conditions = None, chief_complaint = 'Vomiting',
+    complaints = ['nausea', 'diarrhea', 'soreness'], story = "I saw some of my girlfriends late last night, and we had a night on the town. A couple of mimosas, a couple of apps. I got home, walked my cat, and then I started getting sick. I've been throwing up ever since.",
+    diagnosis = 'Food Poisoning', diagnosed = False, weight = 123, height = 64, bg = 94, bp = 108, o2 = 100, temp = 102.1, vision = True, pain = 5, brain = 98, eyes = 97, heart = 99, lungs = 99,
+    kidneys = 97, liver = 93, has_broken_bones = False, broken_bones = [])
+p5 = patients(id = 5, name = 'Crazy Mike', age = 21, sex = 'Male', allergies = {None: None}, conditions = None, chief_complaint = 'psychosis', complaints = ['confusion', 'dilated eyes'],
+    story = "I ain't telling you nothing! I don't know why the cops brought me here! I ain't done nothing wrong! Now get off my back!", diagnosis = 'methamphetamine', diagnosed = False, weight = 147,
+    height = 70, bg = 96, bp = 133, o2 = 94, temp = 97.8, vision = True, pain = 8, brain = 87, eyes = 94, heart = 79, lungs = 93, kidneys = 93, liver = 94, has_broken_bones = True,
+    broken_bones = ['right hand knuckle second digit', 'right hand knuckle third digit'])
+
+patient_list = [p1, p2, p3, p4, p5]
