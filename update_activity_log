@@ -1,5 +1,0 @@
-def update_log(date, time_now, activity, cost, time_required):
-    global t
-    activity_log.append({'Date': date, 'Time': t, 'Activity': activity,
-                         'Cost': cost, 'Time Required (Hours)': time_required})
-    time = t.sleep(time_required*3600)
