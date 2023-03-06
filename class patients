@@ -255,14 +255,20 @@ start_time = dt.datetime(2012, 1, 1, 8, 0, 0, 0)
 elapsed_time = start_time
 activity_log = []
 
+def glucose_to_A1C(glucose):
+    glucose = int(glucose)
+    glucose += 46.7
+    total = glucose / 28.7
+    return round(total, 1)
+
 class TimeManager:
     
     def __init__(self):
-        self.start_time = dt.datetime(2012, 1, 1, 0, 0, 0, 0)
+        self.start_time = dt.datetime(2012, 1, 2, 0, 0, 0, 0)
         self.elapsed_time = start_time
 
     def reset_time(self):
-        self.start_time = dt.datetime(2012, 1, 1, 0, 0, 0, 0)
+        self.start_time = dt.datetime(2012, 1, 2, 0, 0, 0, 0)
         self.elapsed_time = start_time
 
     def print_total_hours_taken(self):
@@ -272,9 +278,12 @@ class TimeManager:
             ampm = " PM"
         else:
             ampm = " AM"
-        time_entered = elapsed_time.strftime("%H:%M %I:%M" + ampm + " %A")
+        time_entered = elapsed_time.strftime("%I:%M" + ampm + " %A")
+        return time_entered
 
-TimeManager = TimeManager()
+tm = TimeManager()
+
+current_patient = random.choice(patient_list)
 
 current_patient = random.choice(patient_list)
 
@@ -287,48 +296,45 @@ class player:
         print('''Welcome to this Medical Diagnostic Training Tool. Whether you look to this program as practice for dealing with a patient or merely to have fun, I hope you enjoy your experience here. Know that these scenarios can absolutely happen in real life and that your actions have consequences.
 
 ''')
-        player.menu(current_patient)
+        self.menu(current_patient)
         
     def menu(self, current_patient):
-        try:
-            menu_list = ['c', 't', 'm', 'p', 'r', 's', 'd', 'v']
-            menu_selection = input('''What do you want to do? 
-            Your choices are:
-            A = Check with Admin
-            C = Consult a Specialist
-            D = Diagnose the Patient
-            M = Prescribe Medication
-            P = Procedures and Surgery
-            R = Check Patient Records
-            T = Talk to Patient
-            V = Check Patient Vitals
+        menu_list = ['c', 't', 'm', 'p', 'r', 's', 'd', 'v']
+        menu_selection = input('''What do you want to do? 
+        Your choices are:
+        A = Check with Admin
+        C = Consult a Specialist
+        D = Diagnose the Patient
+        M = Prescribe Medication
+        P = Procedures and Surgery
+        R = Check Patient Records
+        T = Talk to Patient
+        V = Check Patient Vitals
 
-            ''')
+        ''')
 
-            if menu_selection.lower() == "r":
-                player.patient_records(current_patient)
-                player.menu(current_patient)
-            if menu_selection.lower() == "t":
-                player.patient_discussion(current_patient)
-            if menu_selection.lower() == "m":
-                player.prescribe_medication(current_patient)
-            if menu_selection.lower() == "v":
-                player.vitals(current_patient)
-            if menu_selection.lower() == "s":
-                player.perform_surgery(current_patient)
-            if menu_selection.lower() == "d":
-                player.diagnose_patient(current_patient)
-            if menu_selection.lower() == "c":
-                player.consult_specialist(current_patient)
-            if menu_selection.lower() == "p":
-                player.procedures_surgery(current_patient)
-            if menu_selection.lower() == "a":
-                player.admin(current_patient)
-            if menu_selection.lower() not in menu_list:
-                print("You've chosen an invalid action. Please try again. ")
-        except:
-            print("This is not a valid action. Please try again. ")
-        player.menu(current_patient)
+        if menu_selection.lower() == "r":
+            self.patient_records(current_patient)
+            self.menu(current_patient)
+        if menu_selection.lower() == "t":
+            self.patient_discussion(current_patient)
+        if menu_selection.lower() == "m":
+            self.prescribe_medication(current_patient)
+        if menu_selection.lower() == "v":
+            self.vitals(current_patient)
+        if menu_selection.lower() == "s":
+            self.perform_surgery(current_patient)
+        if menu_selection.lower() == "d":
+            self.diagnose_patient(current_patient)
+        if menu_selection.lower() == "c":
+            self.consult_specialist(current_patient)
+        if menu_selection.lower() == "p":
+            self.procedures_surgery(current_patient)
+        if menu_selection.lower() == "a":
+            self.admin(current_patient)
+        if menu_selection.lower() not in menu_list:
+            print("You've chosen an invalid action. Please try again. ")
+        self.menu(current_patient)
     
     def patient_discussion(self, current_patient):
         question_count = 0
@@ -349,22 +355,22 @@ class player:
 
             Or type "menu" to go back to the main screen. ''')
             print()
-            player.patient_discussion(current_patient)        
+            self.patient_discussion(current_patient)        
         if discussion_question.lower() == "n":
             print("My name is " + current_patient.name + ". ")
             question_count += 1
             print()
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "a":
             print("I'm "+ str(current_patient.age) + " years old. ")
             question_count += 1
             print()
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "s":
             print("I'm a "+ current_patient.sex + ". ")
             question_count += 1
             print()
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == 'al':
             try:
                 print("As far as I'm aware, I'm allergic to " + current_patient.keys() + "." )
@@ -372,15 +378,15 @@ class player:
             except:
                 print("I'm not allergic to anything.")
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "b":
             print(current_patient.story)
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "cc":
             print("I'd say the biggest thing bothering me now is " + current_patient.chief_complaint + ". ")
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "c":
             if len(current_patient.complaints) > 1:
                 print("What symptoms I'm having? I'd say I'm experiencing " + ', '.join(current_patient.complaints[:-1]) + " and " + str(current_patient.complaints[-1]) + ". ")
@@ -388,37 +394,37 @@ class player:
                 print("What symptoms I'm having? I'd say I'm experiencing " + str(curent_patient.complaints) + ".")
             print()
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "h":
             patient_feet = math.floor(current_patient.height/12)
             print("I am " + str(patient_feet) + ' feet and ' + str(current_patient.height - (patient_feet*12)) + ' inches tall.')
             print()
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "w":
             perceived_weight = int(random.randint((round(current_patient.weight * .9)), round((current_patient.weight * 1.1))))
             print("Last time I weighed myself, I was somewhere around " + str(perceived_weight) + " pounds. ")
             print()
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         if discussion_question.lower() == "p":
             print("On a scale of one to ten, my pain level is about a " + current_patient.pain + ". ")
             print()
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
         elif discussion_question.lower() == "main" or discussion_question.lower() == "menu":
-            player.update_log(TimeManager.print_total_hours_taken, 'Visited the patient', 0, 1)
-            player.menu(current_patient)
+            self.update_log(tm, 'Visited the patient', 0, 1)
+            self.menu(current_patient)
         elif discussion_question.lower() not in discussion_list:
             print("What the heck are you even asking me, doc?")
             print()
             question_count += 1
-            player.patient_discussion(current_patient)
+            self.patient_discussion(current_patient)
     
-    def update_log(self, TimeManager, activity, cost, time_required):
+    def update_log(self, tm, activity, cost, time_required):
         global time_entered
-        activity_log.append({"Time Entered": TimeManager, 'Activity': activity, 'Cost': cost, 'Time Required (Hours)': time_required})
-        list(activity_log[-1].values())[0]: time_entered
+        activity_log.append({"Time Entered": tm.print_total_hours_taken(), 'Activity': activity, 'Cost': cost, 'Time Required (Hours)': time_required})
+        list(activity_log[-1].values())[0]: tm.print_total_hours_taken()
 
     def admin(self, current_patient):
         try:
@@ -443,7 +449,7 @@ class player:
                 print("I heard that you diagnosed the patient. Good job.")
         except:
             print("Admin: Why are you asking me about your progress? You haven't done anything yet. Go see the patient.")
-        player.menu(current_patient)
+        self.menu(current_patient)
         
     def patient_records(self, current_patient):
         print("Name: " + current_patient.name)
@@ -454,17 +460,14 @@ class player:
         print("Height (inches): " + str(current_patient.height))
         if len(activity_log) > 0:
             try:
-                print('''Activity Log
-
-                Date - Time - Activity - Cost - Duration
-                ''')
                 for activity in activity_log:
-                    print(activity.values())
+                    print()
+                    print('\n'.join("{}: {}".format(k, v) for k, v in activity.items()))
             except:
                 print("Can't print the activity log.")
         else:
             pass
-        player.menu(current_patient)
+        self.menu(current_patient)
         
     def vitals(self, current_patient):
         vitals_selection = input('What kind of diagnostic test would you like to do? Type "L" for a list of tests. ')
@@ -481,32 +484,32 @@ class player:
         if vitals_selection.lower() == "t":
             print('The temperature reads as ' + str(current_patient.temp) + " F. ")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Temperature', 0, 0)
-            player.vitals(current_patient)
+            self.update_log(tm.print_total_hours_taken, 'Temperature', 0, 0)
+            self.vitals(current_patient)
         if vitals_selection.lower() == "w":
             print('You weighed the patient and found that they weigh ' + str(current_patient.weight) + " pounds. ")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Weight', 0, 0)
-            player.vitals(current_patient)
+            self.update_log(tm.print_total_hours_taken, 'Weight', 0, 0)
+            self.vitals(current_patient)
         if vitals_selection.lower() == "bg":
             print("You tested the patient's blood glucose. The results of the finger stick read as " + 
                   str(current_patient.bg) + " mmol/L. ")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Blood Glucose', 1, 0)
-            player.vitals(current_patient)
+            self.update_log(tm, 'Blood Glucose', 1, 0)
+            self.vitals(current_patient)
         if vitals_selection.lower() == "bp":
             print("You tested the patient's systolic blood pressure and it came back as " + str(current_patient.bp) + ". ")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Blood Pressure', 0, 0)
-            player.vitals(current_patient)
+            self.update_log(tm, 'Blood Pressure', 0, 0)
+            self.vitals(current_patient)
         if vitals_selection.lower() == "o2":
             print("The patient's oximeter read at " + str(current_patient.o2) + "%. ")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Oximeter', 0, 2)
-            player.vitals(current_patient)
+            self.update_log(tm, 'Oximeter', 0, 2)
+            self.vitals(current_patient)
         if vitals_selection.lower() == "menu" or vitals_selection.lower() == "main":
-            player.menu(current_patient)
-        player.vitals(current_patient)
+            self.menu(current_patient)
+        self.vitals(current_patient)
 
     def consult_specialist(self, current_patient):
         consult_selection = input('''Which specialist do you want to consult? Type L to see a list.
@@ -526,36 +529,36 @@ class player:
         if consult_selection.lower() == "cr":
             print('''The cardiologist examined your patient and determined that the patient has about ''' + str(current_patient.heart) + "% of their heart function intact. ")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Cardiology', 0, 2)
-            player.consult_specialist(current_patient)
+            self.update_log(tm, 'Consulted Cardiology', 0, 2)
+            self.consult_specialist(current_patient)
     #     if consult_selection.lower() == "dm":
     #         print('''Dermatologist: Yeah, I saw the patient. They told me they didn't apply sunscreen before waltzing into the ER? Is melanoma some sort of joke to them? Anyways, the patient looks fine. ''')
     #         #I need to add a function here.
     #         print()
-    #         update_log(date, time, 'Consulted Dermatology', 0, 2)
-    #         consult_specialist(patient)
+    #         update_log(TimeManager.print_total_hours_taken, 'Consulted Dermatology', 0, 2)
+    #         self.consult_specialist(current_patient)
         if consult_selection.lower() == "gi":
             print('''The gastrolenterologist examined your patient and determined that the patient has about ''' + str(current_patient.liver) + '''% of their liver function intact.''')
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Gastroenterology', 0, 2)
-            consult_specialist(current_patient)
+            self.update_log(tm, 'Consulted Gastroenterology', 0, 2)
+            self.consult_specialist(current_patient)
         if consult_selection.lower() == "np":
             print('''The nephrologist examined your patient and determined that the patient has about ''' + str(current_patient.kidneys) + '''% of their kidney function intact.''')
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Nephrology', 0, 2)
-            player.consult_specialist(current_patient)
+            self.update_log(tm, 'Consulted Nephrology', 0, 2)
+            self.consult_specialist(current_patient)
         if consult_selection.lower() == "nr":
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Neurology', 0, 2)
+            self.update_log(tm, 'Consulted Neurology', 0, 2)
             print('''The neurologist examined your patient and determined that the patient has about ''' + str(current_patient.brain) + '''% of their brain function intact.''')
             print()
-            player.consult_specialist(current_patient)
+            self.consult_specialist(current_patient)
         if consult_selection.lower() == "op":
             print('''The ophthalmologist examined your patient and determined that the patient has about ''' + str(current_patient.eyes) + "% of their eye function intact.")
             print()
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Ophthalmology', 0, 3)
-            player.consult_specialist(current_patient)
+            self.update_log(tm, 'Consulted Ophthalmology', 0, 3)
+            self.consult_specialist(current_patient)
         if consult_selection.lower() == "or":
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Orthopedics', 0, 2)
+            self.update_log(tm, 'Consulted Orthopedics', 0, 2)
             if len(patient['Broken Bones']) == 0:
                 print('''The orthopedist examined the patient and found that there are no orthopedic-related issues withd the patient.''')
                 print()
@@ -565,40 +568,39 @@ class player:
             if len(patient['Broken Bones']) > 1:
                 print('''The orthopedist examined the patient and found that the following bones are broken: ''' + str([bone.lower() for bone in current_patient.broken_bones]) + ".")
                 print()
-            player.consult_specialist(current_patient)
+            self.consult_specialist(current_patient)
         if consult_selection.lower() == "pl":
             print('''The pulmonologist examined your patient and determined that the patient has about ''' + str(current_patient.lungs).lower() + "% of their lung function intact.")
-            player.update_log(TimeManager.print_total_hours_taken, 'Consulted Pulmonology', 0, 2)
+            self.update_log(tm, 'Consulted Pulmonology', 0, 2)
             print()
-            player.consult_specialist(current_patient)
+            self.consult_specialist(current_patient)
         if consult_selection.lower() == "main" or selection.lower() == "menu":
-            player.menu(current_patient)
-        player.consult_specialist(current_patient)
+            self.menu(current_patient)
+        self.consult_specialist(current_patient)
 
     def procedures_surgery(self, current_patient):
         procedures_surgery_selection = input("What type of test or procedure would you like to order for your patient? Type L to see a list.")
 
-        if procedures_selection.lower() == "l":
+        if procedures_surgery_selection.lower() == "l":
             print('''You can select:
             19 to order a COVID-19 test.
             A1 to test their A1C.
-            AN to order an angiogram.
             CN for Colonoscopy
             CT for CT Scan
             DS for them to order a drug screen.
             EC to order an elecrocardiogram.
             HA to order an Hepatitis A Antibody Test.
-            HB to order an Hepatitis A Antibody Test.
-            HC to order an Hepatitis A Antibody Test.
+            HB to order an Hepatitis B Antibody Test.
+            HC to order an Hepatitis C Antibody Test.
             HV to order an HIV test.
+            LD to order a lead test.
+            LN to order a lipid panel.
+            LP to order a lumbar puncture.
             MA to order an MRA test.
             MC to order a mercury test.
             MG to order a magnesium test.
             MP to order a metabolic panel.
             MR to order an MRI Scan.
-            LD to order a lead test.
-            LN to order a lipid panel.
-            LP to order a lumbar puncture.
             OS to order an osmolality test.
             PE to order a psychiatric evaluation.
             PS to order a pap smear.
@@ -618,7 +620,7 @@ class player:
 
             or for biopsies:
             BB to biopsy their brain.
-            BL to biopsy their testicle.
+            BC to biopsy their testicle.
             BK to biopsy their kidney.
             BI to biopsy their skin.
             BL to biopsy their liver
@@ -629,30 +631,202 @@ class player:
             BY to biopsy their lymph node.
 
             Or type "menu" to go back to the main screen. ''')
+        if procedures_surgery_selection.lower() == "19":
+            if "COVID-19" in current_patient.diagnosis:
+                print("The COVID-19 test came back positive.")
+            else:
+                print("The COVID-19 test came back negative.")
+            self.update_log(tm, 'COVID-19 Test', cost_dict['COVID-19 Test'], time_dict['COVID-19 Test'])
+        if procedures_surgery_selection.lower() == "a1":
+            print("The patient's A1C came back as " + str(glucose_to_A1C(current_patient.bg)))
+            self.update_log(tm, 'COVID-19 Test', cost_dict['A1C'], time_dict['A1C'])
+        if procedures_surgery_selection.lower() == "cn":
+            print("The colonoscopy of the patient found no polyps, masses or lesions.")
+            self.update_log(tm, 'Colonoscopy', cost_dict['Colonoscopy'], time_dict['Colonoscopy'])
+        if procedures_surgery_selection.lower() == "ct":
+            if current_patient.ct == True and "cancer" in current_patient.diagnosis:
+                print("The CT scan has found a mass on the patient's " + (current_patient.diagnosis - " cancer") + " and found that it may be cancerous.")
+            else:
+                print("The CT scan has revealed nothing remarkable.")
+            self.update_log(tm, 'CT Scan', cost_dict['CT Scan'], time_dict['CT Scan'])
+        if procedures_surgery_selection.lower() == "ds":
+            if len(current_patient.rec_drugs) == 0:
+                print("The drug screen has found no recreational drugs.")
+            elif len(current_patient.rec_drugs) == 1:
+                print("The drug screen has found the patient has tested positive for " + ', '.join(current_patient.rec_drugs[0]) + ".")
+            else:
+                print("The drug screen has found the patient has tested for the following drugs:" + ', '.join(current_patient.rec_drugs[:-1]) + " and " + str(current_patient.rec_drugs[-1]) + "." )
+            self.update_log(tm, 'Drug Screen', cost_dict['Drug Screen'], time_dict['Drug Screen'])
+        if procedures_surgery_selection.lower() == "ec":
+            if "heart disease" or "arrythmia" in current_patient.conditions or "heart disease" in current_patient.conditions:
+                pass
+            else:
+                print("The electrocardiogram found nothing noteworthy.")
+            self.update_log(tm, 'Electrocardiogram', cost_dict['Electrocardiogram'], time_dict['Electrocardiogram'])
+        if procedures_surgery_selection.lower() == "ha":
+            print("The patient tested negative for the Hepatitis A Antibody Test.")
+            self.update_log(tm, 'Hepatitis A Antibody Test', cost_dict['Hepatitis A Antibody Test'], time_dict['Hepatitis A Antibody Test'])
+        if procedures_surgery_selection.lower() == "hb":
+            print("The patient tested negative for the Hepatitis B Antibody Test.")
+            self.update_log(tm, 'Hepatitis A Antibody Test', cost_dict['Hepatitis B Antibody Test'], time_dict['Hepatitis B Antibody Test'])
+        if procedures_surgery_selection.lower() == "hc":
+            print("The patient tested negative for the Hepatitis C Antibody Test.")
+            self.update_log(tm, 'Hepatitis A Antibody Test', cost_dict['Hepatitis C Antibody Test'], time_dict['Hepatitis C Antibody Test'])
+        if procedures_surgery_selection.lower() == "hv":
+            print("The patient tested negative for HIV.")
+            self.update_log(tm, 'HIV Test', cost_dict['HIV Test'], time_dict['HIV Test'])
+        if procedures_surgery_selection.lower() == "ld":
+            if current_patient.diagnosis.lower() == "lead toxicity":
+                pass
+            else:
+                print("The patient has normal levels of lead.")
+        if procedures_surgery_selection.lower() == "ln":
+            pass
+        if procedures_surgery_selection.lower() == "lp":
+            pass
+        if procedures_surgery_selection.lower() == "ma":
+            if "blood clot" in current_patient.complaints:
+                pass
+            else:
+                print("There appears to be no clots within any blood vessels.")
+            self.update_log(tm, 'MRA', cost_dict['MRA'], time_dict['MRA'])
+        if procedures_surgery_selection.lower() == "mc":
+            if current_patient.diagnosis.lower() == "mercury toxicity":
+                pass
+            else:
+                print("The patient has normal levels of mercury.")
+        self.update_log(tm, 'Mercury Test', cost_dict['Mercury Test'], time_dict['Mercury Test'])
+        if procedures_surgery_selection.lower() == "mg":
+            if current_patient.diagnosis.lower() == "magnesium toxicity":
+                pass
+            else:
+                print("The patient has normal levels of magnesium.")
+        self.update_log(tm, 'Mercury Test', cost_dict['Magnesium Test'], time_dict['Magnesium Test'])
+        if procedures_surgery_selection.lower() == "mp":
+            pass
+        if procedures_surgery_selection.lower() == "mr":
+            pass
+        if procedures_surgery_selection.lower() == "os":
+            pass
+        if procedures_surgery_selection.lower() == "pe":
+            pass
+        if procedures_surgery_selection.lower() == "ps":
+            pass
+        if procedures_surgery_selection.lower() == "pt":
+            pass
+        if procedures_surgery_selection.lower() == "re":
+            pass
+        if procedures_surgery_selection.lower() == "sa":
+            pass
+        if procedures_surgery_selection.lower() == "sc":
+            pass
+        if procedures_surgery_selection.lower() == "si":
+            pass    
+        if procedures_surgery_selection.lower() == "sl":
+            pass
+        if procedures_surgery_selection.lower() == "sp":
+            pass
+        if procedures_surgery_selection.lower() == "sr":
+            pass
+        if procedures_surgery_selection.lower() == "st":
+            pass
+        if procedures_surgery_selection.lower() == "ur":
+            pass
+        if procedures_surgery_selection.lower() == "vd":
+            pass
+        if procedures_surgery_selection.lower() == "xr":
+            pass
+        if procedures_surgery_selection.lower() == "bb":
+            pass
+        if procedures_surgery_selection.lower() == "bc":
+            pass
+        if procedures_surgery_selection.lower() == "bk":
+            pass
+        if procedures_surgery_selection.lower() == "bi":
+            pass
+        if procedures_surgery_selection.lower() == "bl":
+            pass
+        if procedures_surgery_selection.lower() == "bn":
+            pass
+        if procedures_surgery_selection.lower() == "br":
+            pass
+        if procedures_surgery_selection.lower() == "bs":
+            pass
+        if procedures_surgery_selection.lower() == "bt":
+            pass
+        if procedures_surgery_selection.lower() == "by":
+            pass
         if procedures_surgery_selection.lower() == "menu" or procedures_surgery_selection.lower() == "main" :
-            player.menu(current_patient)
-        player.procedures_surgery(current_patient)
+            self.menu(current_patient)
+        self.procedures_surgery(current_patient)
+        
+    def prescribe_medication(self, current_patient):
+        med_selection = input('''What do you want to prescribe? You can prescribe them:
+        a = acetaminophen
+        i = ibuprofen
+        in = short-acting insulin
+        ab = antibiotics
+
+        Or you can type main to go back to the main menu. ''')
+
+        roll = random.randint(1,10)
+
+        if med_selection.lower() == 'a' and 'acetaminophen' not in current_patient.allergies.keys():
+            try:
+                self.update_log(tm, 'acetaminophen', cost_dict['Acetaminophen'], time_dict['Acetaminophen'])
+                current_patient.pain = current_patient - 2
+                if roll == 1 or roll == 2:
+                    current_patient.complaints.append(random.choice(side_effects_dict['acetaminophen']))
+                print("You have given the patient acetaminophen.")
+                print(roll)
+                print(current_patient.complaints)
+            except:
+                print("Error!")
+
+        if med_selection.lower() == 'i' and 'ibuprofen' not in current_patient.allergies.keys():
+            self.update_log(tm, 'ibuprofen', cost_dict['Ibuprofen'], time_dict['Ibuprofen'])
+            current_patient.pain = current_patient.pain - 2
+            if roll == 1 or roll == 2:
+                current_patient.complaints.append(random.choice(side_effects_dict['Ibuprofen']))
+            print("You have given the patient ibuprofen.")
+            print(roll)
+            print(patient['Complaints'])
+
+        if med_selection.lower() == 'in' and 'insulin' not in current_patient.allergies.keys():
+            try:
+                self.update_log(tm, 'insulin', cost_dict['Humalog'], time_dict['Humalog'])
+                patient.bg = patient.bg - 30
+                current_patient.weight = current_patient.weight + 3
+                print("You have given the patient acetaminophen.")
+                print(roll)
+            except:
+                print("Error!")
+
+        if med_selection.lower() == 'main' or med_selection.lower() == 'main':
+            self.menu(current_patient)
+
+        prescribe_medication(current_patient)
         
     def diagnose_patient(self, current_patient):
         guess = input('What illness would you like to diagnose the patient with? Or type "Main" or "Menu" to go back. ')
         diagnose_score = fuzz.token_set_ratio(guess, current_patient.diagnosis)
         if guess.lower() == "menu" or guess.lower() == "main":
-            player.menu(current_patient)
+            self.menu(current_patient)
         if diagnose_score > 70:
             current_patient.diagnosed = True
             print("You are correct, and have successfully diagnosed your patient!")
             print('Diagnose Score: ' + str(diagnose_score))
-            update_log(TimeManager.print_total_hours_taken, 'Correctly attempted to diagnose the patient with' + str(current_patient.diagnosis), 0, 2)
-            player.patient_survey()
+            self.update_log(tm, 'Correctly attempted to diagnose the patient with' + str(current_patient.diagnosis), 0, 2)
+            self.patient_survey()
         else:
             print("You are incorrect. You have not successfully diagnosed your patient!")
-            player.update_log(TimeManager.print_total_hours_taken, 'Incorrectly attempted to diagnose the patient with' + str(current_patient.diagnosis), 0, 2)
+            self.update_log(tm, 'Incorrectly attempted to diagnose the patient with' + str(current_patient.diagnosis), 0, 2)
             print('Diagnose Score: ' + str(diagnose_score))
-            player.diagnose_patient(current_patient)
+            self.diagnose_patient(current_patient)
         print()
         print(diagnosis)
         print('Diagnose Score: ' + str(diagnose_score))
-        player.menu(current_patient)
+        self.menu(current_patient)
 
     def patient_survey(self, current_patient):
         print("Congratulations! You have successfully diagnosed the patient!")
@@ -664,4 +838,5 @@ class player:
         # - Number of wrong decisions.
 
 player = player()
+
 player.simulation_start(current_patient)
