@@ -38,163 +38,76 @@ for s in soup_list:
     if len(s) > 30 or s[1] == " ":
         soup_list.remove(s)
         
-# Cost Dict (USD)
-
-cost_dict = {
-    'A1C': 85,
-    'Acetaminophen': 2,
-    'Angiogram': 4800,
-    'Appendectomy': 9120,
-    'Back Surgery': 15391,
-    'Barium Swallow': 250,
-    'Bone Graft': 9663,
-    'Bone Biopsy': 3021,
-    'Bone Marrow Injection': 3505,
-    'C-Section': 9600,
-    'Capsule Endoscopy': 1513,
-    'Cast': 485,
-    'Cateracts Surgery': 4688,
-    'Colonoscopy': 3167,
-    'COVID-19 Test': 181,
-    'CT Scan': 2519,
-    'Double Masectomy': 14412,
-    'Drug Screen': 250,
-    'Electrocardiogram': 109,
-    'Emergency Visit': 2084,
-    'Eye Biopsy': 3545,
-    'Feeding Tube Placement': 3060,
-    'Gall Bladder Removal': 9515,
-    'Hemorrhoidectomy': 5123,
-    'Hepatitis A Antibody Test': 84,
-    'Hepatitis A Vaccine': 153,
-    'Hepatitis B Antibody Test': 44,
-    'Hepatitis B Vaccine': 153,
-    'Hepatitis C Antibody Test': 62,
-    'Humalog': 96,
-    'HIV Test': 84,
-    'Ibuprofen': 3,
-    'Insulin': 250,
-    'Kidney Biopsy': 2804,
-    'Kidney Stone Removal': 8016,
-    'Lead Test': 32,
-    'Lipid Panel': 188,
-    'Liver Biopsy': 3037,
-    'Lumbar Puncture': 1274,
-    'Lymph Node Biopsy': 9139,
-    'Masectomy': 5749,
-    'Magnesium Test': 31,
-    'Mercury Test': 34,
-    'Metabolic Panel': 144,
-    'MRA': 785,
-    'MRI Scan': 5130,
-    'Osmolality Test': 31,
-    'Pap Smear': 36,
-    'PET Scan': 2234,
-    'Pregnancy Test': 194,
-    'Psychiatric Diagnostic Evaluation': 300,
-    'Psychotherapy (45-60 minutes)': 201,
-    'Rabies Vaccine': 612,
-    'Rectal Exam': 4743,
-    'Rectal Biopsy': 4799,
-    'RSV Test': 31,
-    'Sickle Cell Screening': 17,
-    'Skin Biopsy': 358,
-    'Sleep Apnea Exam': 243,
-    'Sperm Test': 29,
-    'Spinal Injection': 1950,
-    'STI Testing Panel': 390,
-    'Stool Test': 88,
-    'Strep Test': 270,
-    'Testicular Biopsy': 5077,
-    'Throat Biopsy': 3393,
-    'Tracheotomy': 4531,
-    'Urinalysis': 11,
-    'Vaginal Birth Delivery': 7419,
-    'Vasectomy': 3075,
-    'Vitamin Deficiency Test': 263,
-    'X-Ray': 698,
-}
-
-# Time Dict (hours)
-
-time_dict = {
-    'A1C': 1,
-    'Acetaminophen': 1,
-    'Angiogram': 2,
-    'Appendectomy': 3,
-    'Back Surgery': 3,
-    'Barium Swallow': 1,
-    'Bone Graft': 2,
-    'Bone Biopsy': 48,
-    'Bone Marrow Injection': 1,
-    'C-Section': 1,
-    'Capsule Endoscopy': 8,
-    'Cast': 1,
-    'Cateracts Surgery': 1,
-    'Colonoscopy': 1,
-    'COVID-19 Test': 1,
-    'CT Scan': 1,
-    'Double Masectomy': 3,
-    'Drug Screen': 1,
-    'Electrocardiogram': 1,
-    'Eye Biopsy': 48,
-    'Feeding Tube Placement': 1,
-    'Gall Bladder Removal': 1,
-    'Hemorrhoidectomy': 1,
-    'Hepatitis A Antibody Test': 48,
-    'Hepatitis A Vaccine': 1,
-    'Hepatitis B Antibody Test': 48,
-    'Hepatitis B Vaccine': 1,
-    'Hepatitis C Antibody Test': 48,
-    'HIV Test': 1,
-    'Humalog': 1,
-    'Ibuprofen': 1,
-    'Insulin': 1,
-    'Kidney Biopsy': 48,
-    'Kidney Stone Removal': 2,
-    'Lead Test': 32,
-    'Lipid Panel': 1,
-    'Liver Biopsy': 48,
-    'Lumbar Puncture': 48,
-    'Lymph Node Biopsy': 48,
-    'Masectomy': 2,
-    'Magnesium Test': 3,
-    'Mercury Test': 72,
-    'Metabolic Panel': 24,
-    'MRA': 24,
-    'MRI': 3,
-    'Osmolality Test': 1,
-    'Pap Smear': 1,
-    'PET': 2,
-    'Pregnancy Test': 1,
-    'Psychiatric Diagnostic Evaluation': 1,
-    'Psychotherapy': 1,
-    'Rabies Vaccine': 1,
-    'Rectal Exam': 1,
-    'Rectal Biopsy': 48,
-    'RSV Test': 1,
-    'Sickle Cell Screening': 48,
-    'Skin Biopsy': 48,
-    'Sleep Apnea Exam': 8,
-    'Sperm Test': 1,
-    'Spinal Injection': 1,
-    'STI Testing Panel': 1,
-    'Stool Test': 2,
-    'Strep Test': 1,
-    'Testicular Biopsy': 48,
-    'Throat Biopsy': 48,
-    'Tracheotomy': 1,
-    'Urinalysis': 1,
-    'Vaginal Birth Delivery': 8,
-    'Vasectomy': 1,
-    'Vitamin Deficiency Test': 4,
-    'X-Ray': 1,    
-}
-
-side_effects_dict = {
-    'acetaminophen': ['Nausea', 'Vomiting', 'Constipation', 'Itching', 'Stomach Discomfort'],
-    'ibuprofen': ['Constipation', 'Diarrhea', 'Gas', 'Bloating', 'Nausea', 'Heartburn', 'Indigestion']
-}
+a1c = {"name": "a1c", "cost": 85, "time": 1}
+acetaminophen = {"name": "acetaminophen", "cost": 2, "time": 0, "side_effects": ['Nausea', 'Vomiting', 'Constipation', 'Itching', 'Stomach Discomfort']}
+angiogram = {"name": "angiogram", "cost": 1050, "time": 2}
+appendectomy = {"name": "appendectomy", "cost": 9120, "time": 3}
+back_surgery = {"name": "back surgery", "cost": 15391, "time": 3}
+barium_swallow = {"name": "barium swallow", "cost": 250, "time": 1}
+bone_graft = {"name": "bone graft", "cost": 9663, "time": 2}
+bone_biopsy = {"name": "bone biopsy", "cost": 3021, "time": 48}
+bone_marrow_injection = {"name": "bone marrow injection", "cost": 3505, "time": 1}
+c_section = {"name": "c-section", "cost": 9600, "time": 1}
+capsule_endoscopy = {"name": "capsule endoscopy", "cost": 1513, "time": 8}
+cast = {"name": "cast", "cost": 485, "time": 1}
+cateracts_surgery = {"name": "cateracts surgery", "cost": 4688, "time": 1}
+colonoscopy = {"name": "colonoscopy", "cost": 3167, "time": 1}
+covid_19_test = {"name": "covid-19 test", "cost": 181, "time": 1}
+ct_scan = {"name": "ct scan", "cost": 2519, "time": 1}
+double_masectomy = {"name": "double masectomy", "cost": 14412, "time": 3}
+drug_screen = {"name": "drug screen", "cost": 250, "time": 1}
+electrocardiogram = {"name": "electrocardiogram", "cost": 109, "time": 1}
+eye_biopsy = {"name": "eye biopsy", "cost": 3545, "time": 48}
+feeding_tube_placement = {"name": "feeding tube placement", "cost": 3060, "time": 1}
+gall_bladder_removal = {"name": "gall bladder removal", "cost": 9515, "time": 1}
+hemmerrhoidectomy = {"name": "hemmerrhoidectomy", "cost": 5123, "time": 1}
+hepatitis_a_antibody_test = {"name": "hepatitis a antibody test", "cost": 84, "time": 48}
+hepatitis_a_vaccine = {"name": "hepatitis a vaccine", "cost": 153, "time": 1}
+hepatitis_b_antibody_test = {"name": "hepatitis b antibody test", "cost": 44, "time": 48}
+hepatitis_b_vaccine = {"name": "hepatitis b vaccine", "cost": 153, "time": 1}
+hepatitis_c_antibody_test = {"name": "hepatitis c antibody test", "cost": 62, "time": 48}
+humalog = {"name": "humalog", "cost": 96, "time": 0}
+hiv_test = {"name": "hiv test", "cost": 84, "time": 0}
+ibuprofen = {"name": "ibuprofen", "cost": 3, "time": 0, "side_effects": ['Constipation', 'Diarrhea', 'Gas', 'Bloating', 'Nausea', 'Heartburn', 'Indigestion']}
+kidney_biopsy = {"name": "kidney biopsy", "cost": 2804, "time": 48}
+kidney_stone_removal = {"name": "kidney stone removal", "cost": 8016, "time": 2}
+lead_test = {"name": "lead test", "cost": 32, "time": 32}
+lipid_panel = {"name": "lipid panel", "cost": 188, "time": 1}
+liver_biopsy = {"name": "liver biopsy", "cost": 3037, "time": 48}
+lumbar_puncture = {"name": "lumbar puncture", "cost": 1274, "time": 48}
+lymph_node_biopsy = {"name": "lymph node biopsy", "cost": 9139, "time": 48}
+masectomy = {"name": "masectomy", "cost": 5749, "time": 2}
+magenium_test = {"name": "magenium test", "cost": 31, "time": 3}
+mercury_test = {"name": "mercury test", "cost": 34, "time": 72}
+metabolic_panel = {"name": "metabolic panel", "cost": 144, "time": 24}
+mra = {"name": "mra", "cost": 785, "time": 24}
+mri = {"name": "mri", "cost": 5130, "time": 3}
+osmolality_test = {"name": "osmolality test", "cost": 31, "time": 1}
+pap_smear = {"name": "pap smear", "cost": 36, "time": 1}
+pet_scan = {"name": "pet scan", "cost": 2234, "time": 2}
+pregnancy_test = {"name": "pregnancy test", "cost": 194, "time": .5}
+psychiatric_diagnostic_evaluation = {"name": "psychiatric diagnostic evaluation", "cost": 300, "time": 1}
+psychotherapy = {"name": "psychotherapy", "cost": 201, "time": 1}
+rabies_vaccine = {"name": "rabies vaccine", "cost": 612, "time": 1}
+rectal_biopsy = {"name": "rectal biopsy", "cost": 4799, "time": 1}
+rectal_exam = {"name": "rectal exam", "cost": 4741, "time": .5}
+rsv_test = {"name": "rsv test", "cost": 31, "time": 1}
+sickle_cell_screening = {"name": "sickle cell screening", "cost": 17, "time": 48}
+skin_biopsy = {"name": "skin biopsy", "cost": 358, "time": 48}
+sleep_apnea_exam = {"name": "sleep apnea exam", "cost": 243, "time": 8}
+sperm_test = {"name": "sperm test", "cost": 29, "time": 1}
+spinal_injection = {"name": "spinal injection", "cost": 1950, "time": 1}
+sti_testing_panel = {"name": "sti testing panel", "cost": 390, "time": 1}
+stool_test = {"name": "stool test", "cost": 88, "time": 2}
+strep_test = {"name": "strep test", "cost": 270, "time": .5}
+testicular_biopsy = {"name": "testicular biopsy", "cost": 5077, "time": 48}
+throat_biopsy = {"name": "throat biopsy", "cost": 3393, "time": 48}
+tracheotomy = {"name": "tracheotomy", "cost": 4531, "time": 1}
+urinalysis = {"name": "urinalysis", "cost": 11, "time": 1}
+vaginal_birth_delivery = {"name": "vaginal birth delivery", "cost": 7419, "time": 8}   
+vasectomy = {"name": "vasectomy", "cost": 3075, "time": 1}
+vitamin_deficiency_test = {"name": "vitamin deficiency test", "cost": 263, "time": 4}
+xray = {"name": "x-ray", "cost": 698, "time": 1}
 
 class patients:
     def __init__(self, id = None, name = None, age = None, sex = None, allergies = {}, conditions = None, chief_complaint = None, complaints = [], story = None, diagnosis = None, diagnosed = False,
